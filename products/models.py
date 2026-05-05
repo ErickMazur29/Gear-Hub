@@ -1,12 +1,29 @@
 from django.db import models
 
-# Create your models here.
-class Brand(models.Model):
-    name = models.CharField(max_length=100)
+
+#Categoria dos Produtos
+class Category(models.Model):
+    name = models.CharField(max_length=150)
+
+    class Meta:
+        verbose_name_plural = "Categories"
+        ordering = ['name']
 
     def __str__(self):
         return self.name
+
+
+#Marca dos produtos
+class Brand(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ['name']
+    def __str__(self):
+        return self.name
     
+
+#Produtos a venda    
 class Products(models.Model):
     CONDICIONAL_CHOICES = [
         ('New', 'Novo'),
@@ -22,6 +39,7 @@ class Products(models.Model):
     condition = models.CharField(max_length=5, choices=CONDICIONAL_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='products/')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='product_category', null=True)
 
     class Meta:
         verbose_name_plural = 'Products'
