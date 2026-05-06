@@ -10,6 +10,10 @@
     gap: 1.25rem;
     padding: 1.5rem 0;
   }
+    .products-grid a{
+      text-decoration: none;
+      list-style: none;
+  }
 
   .product-card {
     font-family: 'DM Sans', sans-serif;
@@ -21,7 +25,7 @@
   }
 
   .product-card:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transform: translateY(-2px);
   }
 
@@ -111,36 +115,35 @@
 </style>
 
 {% if products %}
-  <div class="products-grid">
-    {% for product in object_list %}
-      <div class="product-card">
+<div class="products-grid">
+  {% for product in products %}
+  <a href="{% url 'detail_product' product.pk %}">
+    <div class="product-card">
+      {% if product.photo %}
+      <img class="product-card__image" src="{{ product.photo.url }}"
+        alt="{{ product.model_name }} - {{ product.brand }}">
+      {% else %}
+      <div class="product-card__no-image">Sem imagem</div>
+      {% endif %}
 
-        {% if product.photo %}
-          <img class="product-card__image"
-               src="{{ product.photo.url }}"
-               alt="{{ product.model_name }} - {{ product.brand }}">
-        {% else %}
-          <div class="product-card__no-image">Sem imagem</div>
-        {% endif %}
-
-        <div class="product-card__body">
-          <div class="product-card__top">
-            {% if product.condition == 'New' %}
-              <span class="badge badge--new">Novo</span>
-            {% else %}
-              <span class="badge badge--used">Usado</span>
-            {% endif %}
-            <span class="product-card__price">R$ {{ product.price }}</span>
-          </div>
-
-          <p class="product-card__title">{{ product.title }}</p>
-          <p class="product-card__meta">{{ product.brand }}{% if product.category %} · {{ product.category }}{% endif %}</p>
-          <p class="product-card__desc">{{ product.description }}</p>
+      <div class="product-card__body">
+        <div class="product-card__top">
+          {% if product.condition == 'New' %}
+          <span class="badge badge--new">Novo</span>
+          {% else %}
+          <span class="badge badge--used">Usado</span>
+          {% endif %}
+          <span class="product-card__price">R$ {{ product.price }}</span>
         </div>
 
+        <p class="product-card__title">{{ product.title }}</p>
+        <p class="product-card__meta">{{ product.brand }}{% if product.category %} · {{ product.category }}{% endif %}</p>
+        <p class="product-card__desc">{{ product.description }}</p>
       </div>
-    {% endfor %}
-  </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
 {% else %}
   <div class="empty-state">
     <p>Nenhum produto cadastrado no momento.</p>
