@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block content %}
+<style>
+    .detail-page {
+        background: #f3f4f6;
+        min-height: calc(100vh - 64px);
+        padding: 40px 20px;
+    }
+
+    .detail-wrap {
+        max-width: 780px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: #fff;
+        border: 0.5px solid #e5e7eb;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    /* LEFT — image */
+    .detail-image {
+        position: relative;
+        background: #f0f2f5;
+        min-height: 380px;
+    }
+
+    .detail-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .detail-image .no-image {
+        height: 100%;
+        min-height: 380px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #9ca3af;
+        font-size: 13px;
+    }
+
+    .condition-badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 5px;
+        letter-spacing: 0.04em;
+    }
+
+    .badge-new {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .badge-used {
+        background: #fef9c3;
+        color: #854d0e;
+    }
+
+    /* RIGHT — body */
+    .detail-body {
+        padding: 28px 26px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .detail-category {
+        font-size: 11px;
+        font-weight: 600;
+        color: #9ca3af;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+
+    .detail-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #111827;
+        line-height: 1.3;
+        margin-bottom: 4px;
+    }
+
+    .detail-meta {
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 16px;
+    }
+
+    .detail-price {
+        font-family: 'DM Serif Display', serif;
+        font-size: 28px;
+        color: #0f1f3d;
+        margin-bottom: 20px;
+    }
+
+    .detail-divider {
+        border: none;
+        border-top: 0.5px solid #f0f0f0;
+        margin: 0 0 16px;
+    }
+
+    .detail-specs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .spec-row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .spec-label {
+        font-size: 13px;
+        color: #9ca3af;
+        font-weight: 500;
+    }
+
+    .spec-value {
+        font-size: 13px;
+        color: #374151;
+        font-weight: 500;
+        text-align: right;
+    }
+
+    .detail-desc-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #9ca3af;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .detail-desc {
+        font-size: 13px;
+        color: #4b5563;
+        line-height: 1.65;
+        flex: 1;
+        margin-bottom: 24px;
+    }
+
+    .detail-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: auto;
+    }
+
+    .btn-back {
+        flex: 1;
+        height: 40px;
+        background: transparent;
+        border: 0.5px solid #d1d5db;
+        border-radius: 8px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        color: #6b7280;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .15s;
+    }
+
+    .btn-back:hover {
+        background: #f9fafb;
+        color: #374151;
+    }
+
+    .btn-edit {
+        flex: 1;
+        height: 40px;
+        background: #0f1f3d;
+        border: none;
+        border-radius: 8px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background .15s;
+        cursor: pointer;
+    }
+
+    .btn-edit:hover {
+        background: #1a3260;
+    }
+
+    .btn-delete {
+        height: 40px;
+        width: 40px;
+        background: #fef2f2;
+        border: 0.5px solid #fecaca;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background .15s;
+        flex-shrink: 0;
+    }
+
+    .btn-delete:hover {
+        background: #fee2e2;
+    }
+
+    .btn-delete svg {
+        width: 16px;
+        height: 16px;
+        stroke: #dc2626;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+</style>
+
+<div class="detail-page">
+    <div class="detail-wrap">
+
+        <!-- Image -->
+        <div class="detail-image">
+            {% if product.photo %}
+            <img src="{{ product.photo.url }}" alt="{{ product.model_name }} - {{ product.brand }}">
+            {% else %}
+            <div class="no-image">Sem imagem disponível</div>
+            {% endif %}
+
+            <span class="condition-badge {% if product.condition == 'New' %}badge-new{% else %}badge-used{% endif %}">
+                {{ product.get_condition_display }}
+            </span>
+        </div>
+
+        <!-- Body -->
+        <div class="detail-body">
+            {% if product.category %}
+            <p class="detail-category">{{ product.category }}</p>
+            {% endif %}
+            <h1 class="detail-title">{{ product.title }}</h1>
+            <p class="detail-meta">{{ product.brand }} · {{ product.model_name }}</p>
+            <p class="detail-price">R$ {{ product.price|floatformat:2 }}</p>
+
+            <hr class="detail-divider">
+
+            <div class="detail-specs">
+                <div class="spec-row">
+                    <span class="spec-label">Marca</span>
+                    <span class="spec-value">{{ product.brand }}</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">Modelo</span>
+                    <span class="spec-value">{{ product.model_name }}</span>
+                </div>
+                {% if product.category %}
+                <div class="spec-row">
+                    <span class="spec-label">Categoria</span>
+                    <span class="spec-value">{{ product.category }}</span>
+                </div>
+                {% endif %}
+                <div class="spec-row">
+                    <span class="spec-label">Condição</span>
+                    <span class="spec-value">{{ product.get_condition_display }}</span>
+                </div>
+            </div>
+
+            {% if product.description %}
+            <hr class="detail-divider">
+            <p class="detail-desc-label">Descrição</p>
+            <p class="detail-desc">{{ product.description }}</p>
+            {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

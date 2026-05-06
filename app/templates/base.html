@@ -1,31 +1,215 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
-    <title>{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap"
+        rel="stylesheet">
+    {% load static %}
+    <title>{% block title %}GearHub{% endblock %}</title>
 </head>
 
 <style>
-    *{
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
+
+    body {
+        background: #f3f4f6;
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    nav {
+        background: #0f1f3d;
+        width: 100%;
+    }
+
+    .nav-inner {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 0 32px;
+        height: 64px;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .nav-logo img {
+        height: 38px; 
+        width: auto;
+        display: block;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: 16px;
+        margin-right: auto;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.72);
+        text-decoration: none;
+        padding: 7px 13px;
+        border-radius: 8px;
+        transition: background .15s, color .15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+
+    .nav-links .btn-create {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 0.5px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.9);
+        margin-left: 20px;
+    }
+
+    .nav-search {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.08);
+        border: 0.5px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        overflow: hidden;
+        height: 36px;
+    }
+
+    .nav-search input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        padding: 0 12px;
+        width: 500px;
+    }
+
+    .nav-search input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .nav-search button {
+        background: rgba(255, 255, 255, 0.12);
+        border: none;
+        border-left: 0.5px solid rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.8);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 0 14px;
+        height: 36px;
+        cursor: pointer;
+        transition: background .15s;
+    }
+
+    .nav-search button:hover {
+        background: rgba(255, 255, 255, 0.22);
+    }
+
+    .nav-auth {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 8px;
+    }
+
+    .btn-nav-outline {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8);
+        background: transparent;
+        border: 0.5px solid rgba(255, 255, 255, 0.25);
+        border-radius: 8px;
+        padding: 7px 16px;
+        text-decoration: none;
+        transition: all .15s;
+        cursor: pointer;
+    }
+
+    .btn-nav-outline:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+    }
+
+    .btn-nav-solid {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #0f1f3d;
+        background: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 7px 16px;
+        cursor: pointer;
+        transition: background .15s;
+    }
+
+    .btn-nav-solid:hover {
+        background: #e2e8f0;
+    }
 </style>
 
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="">Home</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    {% block content %}
-    {% endblock %}
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <a href="{% url 'products_list' %}">
+                    <img src="{% static 'img/logon.png' %}" alt="GearHub">
+                </a>
+            </div>
+
+            <div class="nav-links">
+                <a href="{% url 'products_list' %}"
+                    class="{% if request.resolver_match.url_name == 'products_list' %}active{% endif %}">
+                    Home
+                </a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'new_product' %}" class="btn-create">
+                    + Novo anúncio
+                </a>
+                {% endif %}
+            </div>
+
+            <form method="GET" action="{% url 'products_list' %}" style="margin:0;">
+                <div class="nav-search">
+                    <input type="text" name="search" value="{{ request.GET.search }}" placeholder="Buscar produto...">
+                    <button type="submit">Buscar</button>
+                </div>
+            </form>
+
+            <div class="nav-auth">
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}" style="margin:0;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-nav-solid">Logout</button>
+                </form>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn-nav-outline">Login</a>
+                <a href="{% url 'register' %}" class="btn-nav-outline">Cadastre-se</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
 </body>
+
 </html>
