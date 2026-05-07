@@ -23,7 +23,7 @@ from accounts.views import Login, Register, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', ProductsList.as_view(), name= 'products_list'),
+    path('', ProductsList.as_view(), name= 'products_list'),
     path('new_product/', NewProduct.as_view(), name = 'new_product'),
     path('product/<int:pk>', DetailProduct.as_view(), name = 'detail_product'),
     path('register/', Register.as_view(), name='register'),
