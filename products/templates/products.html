@@ -1,153 +1,71 @@
 {% extends 'base.html' %}
 {% block title %}Produtos{% endblock %}
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock %}
+
 
 {% block content %}
-<style>
-  .products-grid {
-    font-family: 'DM Sans', sans-serif;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.25rem;
-    padding: 1.5rem 0;
-  }
-    .products-grid a{
-      text-decoration: none;
-      list-style: none;
-  }
 
-  .product-card {
-    font-family: 'DM Sans', sans-serif;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-
-  .product-card:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
-  }
-
-  .product-card__image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .product-card__no-image {
-    width: 100%;
-    height: 180px;
-    background: #f3f4f6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #9ca3af;
-    font-size: 0.85rem;
-  }
-
-  .product-card__body {
-    padding: 12px 14px;
-  }
-
-  .product-card__top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-  }
-
-  .badge {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
-
-  .badge--new {
-    background: #dcfce7;
-    color: #166534;
-  }
-
-  .badge--used {
-    background: #fef9c3;
-    color: #854d0e;
-  }
-
-  .product-card__price {
-    font-family: 'DM Serif Display', serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #111827;
-  }
-
-  .product-card__title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #111827;
-    margin: 0 0 2px;
-    line-height: 1.35;
-  }
-
-  .product-card__meta {
-    font-size: 12px;
-    color: #6b7280;
-    margin: 0 0 8px;
-  }
-
-  .product-card__desc {
-    font-size: 12px;
-    color: #9ca3af;
-    margin: 0;
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 3rem 1rem;
-    color: #6b7280;
-  }
-</style>
-
-{% if products %}
-<div class="products-grid">
-  {% for product in products %}
-  <a href="{% url 'detail_product' product.pk %}">
-    <div class="product-card">
-      {% if product.photo %}
-      <img class="product-card__image" src="{{ product.photo.url }}"
-        alt="{{ product.model_name }} - {{ product.brand }}">
-      {% else %}
-      <div class="product-card__no-image">Sem imagem</div>
-      {% endif %}
-
-      <div class="product-card__body">
-        <div class="product-card__top">
-          {% if product.condition == 'New' %}
-          <span class="badge badge--new">Novo</span>
-          {% else %}
-          <span class="badge badge--used">Usado</span>
-          {% endif %}
-          <span class="product-card__price">R$ {{ product.price }}</span>
+    {% if products %}
+        <div class="categories">
+            <a href="{% url 'products_list' %}" 
+                class="cat-btn {% if not request.GET.category and not request.GET.search %}active{% endif %}">
+                Todos
+            </a>
+            <a href="{% url 'products_list' %}?category=Processador" 
+                class="cat-btn {% if request.GET.category == 'Processador' %}active{% endif %}">
+                Processadores
+            </a>
+            <a href="{% url 'products_list' %}?category=Monitor" 
+                class="cat-btn {% if request.GET.category == 'Monitor' %}active{% endif %}">
+                Monitores
+            </a>
+            <a href="{% url 'products_list' %}?category=Placa de video" 
+                class="cat-btn {% if request.GET.category == 'Placa de video' %}active{% endif %}">
+                Placas de Vídeo
+            </a>
         </div>
+        <hr>
+        <div class="products-grid">
 
-        <p class="product-card__title">{{ product.title }}</p>
-        <p class="product-card__meta">{{ product.brand }}{% if product.category %} · {{ product.category }}{% endif %}</p>
-        <p class="product-card__desc">{{ product.description }}</p>
+            {% for product in products %}
+                <a href="{% url 'detail_product' product.pk %}">
+                    <div class="product-card">
+                        {% if product.photo %}
+                            <img class="product-card__image" src="{{ product.photo.url }}" alt="{{ product.model_name }} - {{ product.brand }}">
+                        {% else %}
+                            <div class="product-card__no-image">Sem imagem</div>
+                        {% endif %}
+
+                        <div class="product-card__body">
+                            <div class="product-card__top">
+                                {% if product.condition == 'New' %}
+                                    <span class="badge badge--new">Novo</span>
+                                {% else %}
+                                    <span class="badge badge--used">Usado</span>
+                                {% endif %}
+                                    <span class="product-card__price">R$ {{ product.price }}</span>
+                            </div>
+
+                            <p class="product-card__title">{{ product.title }}</p>
+                            <p class="product-card__meta">{{ product.brand }}{% if product.category %} · {{ product.category }}{% endif %}</p>
+                            <p class="product-card__desc">{{ product.description }}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div> 
+
+    {% else %}
+
+      <div class="empty-state">
+        <p>Nenhum produto cadastrado no momento.</p>
       </div>
-    </div>
-  </a>
-  {% endfor %}
-</div>
-{% else %}
-  <div class="empty-state">
-    <p>Nenhum produto cadastrado no momento.</p>
-  </div>
-{% endif %}
+
+    {% endif %}
 
 {% endblock %}

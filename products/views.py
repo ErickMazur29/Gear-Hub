@@ -13,13 +13,26 @@ class ProductsList(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        products = super().get_queryset()
+        queryset = super().get_queryset()
         search = self.request.GET.get('search')
+        category = self.request.GET.get('category')
 
         if search:
-            products = products.filter(title__icontains = search)
-        return products
+            queryset = queryset.filter(
+                title__icontains=search
+            ) | queryset.filter(
+                model_name__icontains=search
+            ) | queryset.filter(
+                brand__name__icontains=search  # FK, so brand__name
+            )
 
+        if category:    
+            queryset = queryset.filter(
+                category__name__icontains=category  # FK, so category__name
+            )
+
+        return queryset.distinct()
+    
 #criar novo produto / anuncio
 class NewProduct(CreateView):
     model = Products
