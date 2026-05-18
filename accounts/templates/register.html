@@ -162,6 +162,18 @@
                 {{ form.username }}
             </div>
             <div class="auth-field">
+                <label>Idade</label>
+                {{ form.age }}
+            </div>
+            <div class="auth-field">
+                <label>Gênero</label>
+                {{ form.gender }}
+            </div>
+            <div class="auth-field">
+                <label>Telefone</label>
+                {{ form.phone }}
+            </div>
+            <div class="auth-field">
                 <label>Senha</label>
                 {{ form.password1 }}
             </div>
@@ -169,6 +181,7 @@
                 <label>Confirmar senha</label>
                 {{ form.password2 }}
             </div>
+            
             <button type="submit" class="auth-btn">Criar conta</button>
         </form>
         <p class="auth-link">Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
