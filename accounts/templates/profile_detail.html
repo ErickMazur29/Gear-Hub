@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Perfil — {{ profile.user.username }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+  <div class="profile-wrap">
+    <div class="profile-card">
+
+      <div class="profile-header">
+        <div class="avatar">{{ profile.user.username|first|upper }}</div>
+        <div class="profile-header-info">
+          <h2>{{ profile.user.username }}</h2>
+          <p>{{ profile.user.email }}</p>
+        </div>
+      </div>
+
+      <div class="profile-body">
+        <p class="section-label">Informações pessoais</p>
+        <div class="info-list">
+
+          <div class="info-row">
+            <span class="info-label">Usuário</span>
+            <span class="info-value">{{ profile.user.username }}</span>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">Idade</span>
+            <span class="info-value">{{ profile.age }} anos</span>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">Gênero</span>
+            <span class="info-value">{{ profile.get_gender_display }}</span>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">Telefone</span>
+            <span class="info-value">{{ profile.phone }}</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="profile-footer">
+        <a href="{% url 'products_list' %}" class="btn-back">← Voltar</a>
+        {% if user == profile.user %}
+          <a href="#" class="btn-edit">Editar perfil</a>
+        {% endif %}
+      </div>
+
+      <hr>
+
+      <h1>Meus anuncios</h1>
+
+      
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@ class BrandAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'brand', 'model_name', 'price','description', 'condition','created_at', 'photo', 'category',)
+    list_display = ('title', 'brand', 'model_name', 'price','description', 'condition','created_at', 'photo', 'category', 'seller')
     search_fields = ('title'),
 
 admin.site.register(Brand, BrandAdmin)

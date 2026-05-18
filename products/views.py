@@ -40,7 +40,12 @@ class NewProduct(CreateView):
     template_name = 'new_product.html'
     success_url = reverse_lazy('products_list')
 
+    def form_valid(self, form):
+        form.instance.seller = self.request.user.profile
+        return super().form_valid(form)
+
 class DetailProduct(DetailView):
     model = Products
     template_name = 'detail_product.html'
     context_object_name = 'product'
+
