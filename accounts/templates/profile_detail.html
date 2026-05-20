@@ -45,6 +45,10 @@
             <span class="info-value">{{ profile.phone }}</span>
           </div>
 
+          <div class="info-row">
+          </div>
+
+
         </div>
       </div>
 
@@ -55,12 +59,49 @@
         {% endif %}
       </div>
 
-      <hr>
+      <div class="ads-section">
+        <div class="ads-section-header">
+          <div class="ads-section-header-left">
+            <span class="section-label">Meus anúncios</span>
+            <span class="ads-count">{{ profile.product_selles.count }}</span>
+          </div>
+          {% if user == profile.user %}
+            <a href="{% url 'new_product' %}" class="ads-new-btn">+ Novo</a>
+          {% endif %}
+        </div>
 
-      <h1>Meus anuncios</h1>
+        {% if profile.product_selles.exists %}
+          {% for product in profile.product_selles.all %}
+          <div class="ad-item">
+            <div class="ad-thumb">
+              {% if product.photo %}
+                <img src="{{ product.photo.url }}" alt="{{ product.title }}">
+              {% else %}
+                <span class="ad-thumb-empty">📦</span>
+              {% endif %}
+            </div>
+            <div class="ad-info">
+              <p class="ad-title">{{ product.title }}</p>
+              <p class="ad-meta">{{ product.brand }} · {{ product.category }}</p>
+            </div>
+            <div class="ad-right">
+              <span class="ad-price">R$ {{ product.price }}</span>
+              <div class="ad-badges">
+                <span class="badge badge--{{ product.condition|lower }}">{{ product.get_condition_display }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
 
-      
-
+        {% else %}
+          <div class="ads-empty">
+            <p>Nenhum anúncio publicado ainda.</p>
+            {% if user == profile.user %}
+              <a href="{% url 'new_product' %}" class="ads-new-btn">Criar primeiro anúncio</a>
+            {% endif %}
+          </div>
+        {% endif %}
+        </div>
     </div>
   </div>
 </div>

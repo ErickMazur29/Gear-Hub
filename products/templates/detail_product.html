@@ -63,6 +63,13 @@
             <p class="detail-desc">{{ product.description }}</p>
             {% endif %}
 
+            {% if product.seller %}
+                <div class="spec-row">
+                    <span class="spec-label">Vendedor</span>
+                    <span class="spec-value">{{ product.seller.phone }}</span>
+                </div>
+            {% endif %}
+
         </div>
     </div>
 

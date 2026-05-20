@@ -204,6 +204,7 @@
                     {% csrf_token %}
                     <button type="submit" class="btn-nav-solid">Logout</button>
 
+                    <a href="{% url 'profile_detail' request.user.profile.pk %}" class="btn-nav-outline">perfil</a>
 
 
                 </form>
