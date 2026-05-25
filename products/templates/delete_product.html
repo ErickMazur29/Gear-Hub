@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+  <div class="profile-wrap">
+    <div class="profile-card">
+
+      <div class="profile-header">
+        <div class="profile-header-info">
+          <h2>Excluir anúncio</h2>
+          <p>Essa ação não pode ser desfeita</p>
+        </div>
+      </div>
+
+      <div class="profile-body">
+        <p style="font-size:14px; color:#374151; margin-bottom: 20px;">
+          Tem certeza que deseja excluir <strong>{{ object.title }}</strong>?
+        </p>
+        <form method="post">
+          {% csrf_token %}
+          <div class="profile-footer" style="padding: 0;">
+            <a href="{% url 'profile_detail' request.user.profile.pk %}" class="btn-back">← Cancelar</a>
+            <button type="submit" class="btn-edit" style="background:#dc2626;">Excluir</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

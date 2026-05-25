@@ -214,11 +214,13 @@
             <div class="form-field"><label>Descrição</label>{{ form.description }}</div>
             <div class="form-field"><label>Foto do produto</label>{{ form.photo }}</div>
             <hr>
-            <div class="form-field"><label>vendedor: </label>{{ form.seller }}</div>
+            
+            <div class="form-field"><label>Vendedor: </label>{{ request.user.profile }}</div>
 
-
+        
             <button type="submit" class="form-btn">Publicar anúncio</button>
         </form>
+        
     </div>
 </div>
 {% endblock %}

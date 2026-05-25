@@ -23,3 +23,20 @@ class RegisterForm(UserCreationForm):
         )
 
         return user
+    
+class ProfileUpdateForm(forms.ModelForm):
+    username = forms.CharField(max_length=100)
+
+    class Meta:
+        model = Profile
+        fields = ['age', 'gender', 'phone']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].initial = self.instance.user.username
+
+    def save(self, commit=True):
+        profile = super().save(commit)
+        profile.user.username = self.cleaned_data['username']
+        profile.user.save()
+        return profile

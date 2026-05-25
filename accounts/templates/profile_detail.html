@@ -10,99 +10,111 @@
 
 {% block content %}
 <div class="profile-page">
-  <div class="profile-wrap">
-    <div class="profile-card">
+    <div class="profile-wrap">
+        <div class="profile-card">
 
-      <div class="profile-header">
-        <div class="avatar">{{ profile.user.username|first|upper }}</div>
-        <div class="profile-header-info">
-          <h2>{{ profile.user.username }}</h2>
-          <p>{{ profile.user.email }}</p>
-        </div>
-      </div>
-
-      <div class="profile-body">
-        <p class="section-label">Informações pessoais</p>
-        <div class="info-list">
-
-          <div class="info-row">
-            <span class="info-label">Usuário</span>
-            <span class="info-value">{{ profile.user.username }}</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Idade</span>
-            <span class="info-value">{{ profile.age }} anos</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Gênero</span>
-            <span class="info-value">{{ profile.get_gender_display }}</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Telefone</span>
-            <span class="info-value">{{ profile.phone }}</span>
-          </div>
-
-          <div class="info-row">
-          </div>
-
-
-        </div>
-      </div>
-
-      <div class="profile-footer">
-        <a href="{% url 'products_list' %}" class="btn-back">← Voltar</a>
-        {% if user == profile.user %}
-          <a href="#" class="btn-edit">Editar perfil</a>
-        {% endif %}
-      </div>
-
-      <div class="ads-section">
-        <div class="ads-section-header">
-          <div class="ads-section-header-left">
-            <span class="section-label">Meus anúncios</span>
-            <span class="ads-count">{{ profile.product_selles.count }}</span>
-          </div>
-          {% if user == profile.user %}
-            <a href="{% url 'new_product' %}" class="ads-new-btn">+ Novo</a>
-          {% endif %}
+        <div class="profile-header">
+            <div class="avatar">{{ profile.user.username|first|upper }}</div>
+            <div class="profile-header-info">
+            <h2>{{ profile.user.username }}</h2>
+            <p>{{ profile.user.email }}</p>
+            </div>
         </div>
 
-        {% if profile.product_selles.exists %}
-          {% for product in profile.product_selles.all %}
-          <div class="ad-item">
-            <div class="ad-thumb">
-              {% if product.photo %}
-                <img src="{{ product.photo.url }}" alt="{{ product.title }}">
-              {% else %}
-                <span class="ad-thumb-empty">📦</span>
-              {% endif %}
-            </div>
-            <div class="ad-info">
-              <p class="ad-title">{{ product.title }}</p>
-              <p class="ad-meta">{{ product.brand }} · {{ product.category }}</p>
-            </div>
-            <div class="ad-right">
-              <span class="ad-price">R$ {{ product.price }}</span>
-              <div class="ad-badges">
-                <span class="badge badge--{{ product.condition|lower }}">{{ product.get_condition_display }}</span>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
+        <div class="profile-body">
+            <p class="section-label">Informações pessoais</p>
+            <div class="info-list">
 
-        {% else %}
-          <div class="ads-empty">
-            <p>Nenhum anúncio publicado ainda.</p>
+            <div class="info-row">
+                <span class="info-label">Usuário</span>
+                <span class="info-value">{{ profile.user.username }}</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Idade</span>
+                <span class="info-value">{{ profile.age }} anos</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Gênero</span>
+                <span class="info-value">{{ profile.get_gender_display }}</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Telefone</span>
+                <span class="info-value">{{ profile.phone }}</span>
+            </div>
+
+            <div class="info-row">
+            </div>
+
+
+            </div>
+        </div>
+
+        <div class="profile-footer">
+            <a href="{% url 'products_list' %}" class="btn-back">← Voltar</a>
             {% if user == profile.user %}
-              <a href="{% url 'new_product' %}" class="ads-new-btn">Criar primeiro anúncio</a>
+            <a href="{% url 'profile_update' pk=profile.pk%}" class="btn-edit">Editar perfil</a>
             {% endif %}
-          </div>
-        {% endif %}
+        </div>
+
+        <div class="ads-section">
+            <div class="ads-section-header">
+                <div class="ads-section-header-left">
+                    <span class="section-label">Meus anúncios</span>
+                    <span class="ads-count">{{ profile.product_selles.count }}</span>
+                </div>
+                {% if user == profile.user %}
+                    <a href="{% url 'new_product' %}" class="ads-new-btn">+ Novo</a>
+                {% endif %}
+            </div>
+
+            {% if profile.product_selles.exists %}
+                {% for product in profile.product_selles.all %}
+                    <div class="ad-item">
+
+                        <a href="{% url 'detail_product' product.pk %}" class="ad-item-link">
+                        <div class="ad-thumb">
+                            {% if product.photo %}
+                            <img src="{{ product.photo.url }}" alt="{{ product.title }}">
+                            {% else %}
+                            <span class="ad-thumb-empty">📦</span>
+                            {% endif %}
+                        </div>
+                        <div class="ad-info">
+                            <p class="ad-title">{{ product.title }}</p>
+                            <p class="ad-meta">{{ product.brand }} · {{ product.category }}</p>
+                        </div>
+                        <div class="ad-right">
+                            <span class="ad-price">R$ {{ product.price }}</span>
+                            <div class="ad-badges">
+                            <span class="badge badge--{{ product.condition|lower }}">{{ product.get_condition_display }}</span>
+                            </div>
+                        </div>
+                        </a>
+
+                        {% if user == profile.user %}
+                        <div class="ad-actions">
+                        <a href="{% url 'delete_product' pk=product.pk %}" class="act-btn act-btn--danger">Excluir</a>
+                        </div>
+                        <div class="ad-actions">
+                        <a href="{% url 'update_product' pk=product.pk %}" class="act-btn act-btn--primary">Editar</a>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="ads-empty">
+                    <p>Nenhum anúncio publicado ainda.</p>
+                    {% if user == profile.user %}
+                    <a href="{% url 'new_product' %}" class="ads-new-btn">Criar primeiro anúncio</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+            </div>
         </div>
     </div>
-  </div>
 </div>
 {% endblock %}

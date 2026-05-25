@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+  <div class="profile-wrap">
+    <div class="profile-card">
+
+      <div class="profile-header">
+        <div class="profile-header-info">
+          <h2>Editar anúncio</h2>
+          <p>{{ object.title }}</p>
+        </div>
+      </div>
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="profile-body">
+          <p class="section-label">Informações gerais</p>
+          <div class="edit-field">
+            <label class="info-label">Título</label>
+            {{ form.title }}
+          </div>
+          <div class="edit-field">
+            <label class="info-label">Marca</label>
+            {{ form.brand }}
+          </div>
+          <div class="edit-field">
+            <label class="info-label">Categoria</label>
+            {{ form.category }}
+          </div>
+
+          <p class="section-label" style="margin-top: 20px;">Detalhes</p>
+          <div class="edit-field">
+            <label class="info-label">Nome do modelo</label>
+            {{ form.model_name }}
+          </div>
+          <div class="edit-field">
+            <label class="info-label">Preço (R$)</label>
+            {{ form.price }}
+          </div>
+          <div class="edit-field">
+            <label class="info-label">Condição</label>
+            {{ form.condition }}
+          </div>
+          <div class="edit-field">
+            <label class="info-label">Descrição</label>
+            {{ form.description }}
+          </div>
+          <div class="edit-field">
+            <label class="info-label">Foto</label>
+            {{ form.photo }}
+          </div>
+
+          {% if form.errors %}
+          <div class="form-errors">
+            {% for field in form %}
+              {% for error in field.errors %}
+                <p class="form-error">{{ error }}</p>
+              {% endfor %}
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="profile-footer">
+          <a href="{% url 'profile_detail' request.user.profile.pk %}" class="btn-back">← Cancelar</a>
+          <button type="submit" class="btn-edit">Salvar alterações</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

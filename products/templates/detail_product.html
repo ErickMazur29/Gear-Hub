@@ -66,6 +66,10 @@
             {% if product.seller %}
                 <div class="spec-row">
                     <span class="spec-label">Vendedor</span>
+                    <span class="spec-value">{{ product.seller.user }}</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">Contato</span>
                     <span class="spec-value">{{ product.seller.phone }}</span>
                 </div>
             {% endif %}

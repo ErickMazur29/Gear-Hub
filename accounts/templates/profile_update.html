@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+  <div class="profile-wrap">
+    <div class="profile-card">
+
+      <div class="profile-header">
+        <div class="avatar">{{ profile.user.username|first|upper }}</div>
+        <div class="profile-header-info">
+          <h2>Editar perfil</h2>
+          <p>{{ profile.user.email }}</p>
+        </div>
+      </div>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="profile-body">
+          <p class="section-label">Informações da conta</p>
+          <div class="edit-field">
+            <label class="info-label">Usuário</label>
+            {{ form.username }}
+          </div>
+
+          <p class="section-label" style="margin-top: 20px;">Informações pessoais</p>
+          <div class="edit-field">
+            <label class="info-label">Idade</label>
+            {{ form.age }}
+          </div>
+          <div class="edit-field">
+            <label class="info-label">Gênero</label>
+            {{ form.gender }}
+          </div>
+          <div class="edit-field">
+            <label class="info-label">Telefone</label>
+            {{ form.phone }}
+          </div>
+
+          {% if form.errors %}
+          <div class="form-errors">
+            {% for field in form %}
+              {% for error in field.errors %}
+                <p class="form-error">{{ error }}</p>
+              {% endfor %}
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="profile-footer">
+          <a href="{% url 'profile_detail' pk=profile_update.pk %}" class="btn-back">← Cancelar</a>
+          <button type="submit" class="btn-edit">Salvar alterações</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
