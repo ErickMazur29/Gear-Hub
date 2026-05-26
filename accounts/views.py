@@ -28,7 +28,7 @@ class Login(LoginView):
         return reverse_lazy('products_list')
     
 #Logout de usuario
-@method_decorator(login_required(login_url='login'), name='dispatch')    
+ 
 def logout_view(request):
     logout(request)
     return redirect ('products_list')
