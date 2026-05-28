@@ -42,7 +42,7 @@ hr {
 .products-grid {
     font-family: 'DM Sans', sans-serif;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.25rem;
     padding: 1.5rem 0;
     margin: 0px 70px 20px 70px;
@@ -69,14 +69,14 @@ hr {
 
 .product-card__image {
     width: 100%;
-    height: 180px;
+    height: 245px;
     object-fit: cover;
     display: block;
 }
 
 .product-card__no-image {
     width: 100%;
-    height: 180px;
+    height: 245px;
     background: #f3f4f6;
     display: flex;
     align-items: center;

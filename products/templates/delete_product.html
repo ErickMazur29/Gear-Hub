@@ -23,10 +23,21 @@
         </p>
         <form method="post">
           {% csrf_token %}
+
+          {% if user.is_superuser %}
+          <div class="profile-footer" style="padding: 0;">
+            <a href="{% url 'detail_product' pk=delete_product.pk %}" class="btn-back">← Cancelar</a>
+            <button type="submit" class="btn-edit" style="background:#dc2626;">Excluir</button>
+          </div>
+
+          {% else %} 
           <div class="profile-footer" style="padding: 0;">
             <a href="{% url 'profile_detail' request.user.profile.pk %}" class="btn-back">← Cancelar</a>
             <button type="submit" class="btn-edit" style="background:#dc2626;">Excluir</button>
           </div>
+
+          {% endif %}
+          
         </form>
       </div>
 

@@ -23,6 +23,7 @@
     body {
         background: #f3f4f6;
         font-family: 'DM Sans', sans-serif;
+        flex-wrap: wrap;
     }
 
     nav {
@@ -126,8 +127,12 @@
     .nav-auth {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 15px;
         margin-left: 8px;
+    }
+    .nav-auth p{
+        color: #e2e8f0;
+        font-weight: bold;
     }
 
     .btn-nav-outline {
@@ -199,13 +204,22 @@
             </div>
 
             <div class="nav-auth">
-                {% if user.is_authenticated %}
+                
+                {% if user.is_superuser %}
+                <p>Olá, {{request.user.username}}!</p>
+                <form method="post" action="{% url 'logout' %}" style="margin:0;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-nav-solid">Logout</button>
+                    <a href="{% url 'admin:index' %}" class="btn-nav-outline">Painel Admin</a>
+
+                {% elif user.is_authenticated %}
+                <p>Olá, {{request.user.username}}!</p>
                 <form method="post" action="{% url 'logout' %}" style="margin:0;">
                     {% csrf_token %}
                     <button type="submit" class="btn-nav-solid">Logout</button>
                     <a href="{% url 'profile_detail' request.user.profile.pk %}" class="btn-nav-outline">perfil</a>
-
                 </form>
+
                 {% else %}
                 <a href="{% url 'login' %}" class="btn-nav-outline">Login</a>
                 <a href="{% url 'register' %}" class="btn-nav-outline">Cadastre-se</a>

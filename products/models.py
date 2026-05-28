@@ -41,7 +41,7 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='products/')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='product_category', null=True)
-    seller = models.ForeignKey(Profile, on_delete=models.PROTECT, related_name='product_selles', null=True)
+    seller = models.ForeignKey(Profile, on_delete=models.PROTECT, related_name='product_seller', null=True)
 
     class Meta:
         verbose_name_plural = 'Products'

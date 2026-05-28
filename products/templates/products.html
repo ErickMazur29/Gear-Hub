@@ -10,15 +10,15 @@
 
 {% block content %}
 
-    {% if products %}
+    
         <div class="categories">
             <a href="{% url 'products_list' %}" 
                 class="cat-btn {% if not request.GET.category and not request.GET.search %}active{% endif %}">
                 Todos
             </a>
-            <a href="{% url 'products_list' %}?category=Processador" 
-                class="cat-btn {% if request.GET.category == 'Processador' %}active{% endif %}">
-                Processadores
+            <a href="{% url 'products_list' %}?category=Armazenamento" 
+                class="cat-btn {% if request.GET.category == 'Armazenamento' %}active{% endif %}">
+                Armazenamento
             </a>
             <a href="{% url 'products_list' %}?category=Monitor" 
                 class="cat-btn {% if request.GET.category == 'Monitor' %}active{% endif %}">
@@ -28,8 +28,30 @@
                 class="cat-btn {% if request.GET.category == 'Placa de video' %}active{% endif %}">
                 Placas de Vídeo
             </a>
+            <a href="{% url 'products_list' %}?category=Console" 
+                class="cat-btn {% if request.GET.category == 'Console' %}active{% endif %}">
+                Consoles
+            </a>
+            <a href="{% url 'products_list' %}?category=Teclado" 
+                class="cat-btn {% if request.GET.category == 'Teclado' %}active{% endif %}">
+                Teclado
+            </a>
+            <a href="{% url 'products_list' %}?category=Mouse" 
+                class="cat-btn {% if request.GET.category == 'Mouse' %}active{% endif %}">
+                Mouse
+            </a>
+            <a href="{% url 'products_list' %}?category=Notebook" 
+                class="cat-btn {% if request.GET.category == 'Notebook' %}active{% endif %}">
+                Notebook
+            </a>
+            <a href="{% url 'products_list' %}?category=Refrigerador" 
+                class="cat-btn {% if request.GET.category == 'Refrigerador' %}active{% endif %}">
+                Refrigeradores
+            </a>
         </div>
         <hr>
+        
+        {% if products %}
         <div class="products-grid">
 
             {% for product in products %}

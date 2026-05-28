@@ -24,6 +24,11 @@ class RegisterForm(UserCreationForm):
 
         return user
     
+    def clean_age(self):
+        age = self.cleaned_data.get('age')
+        if age < 18 :
+            self.add_error('age', 'Apenas maiores de idade podem se cadastrar no site!')
+    
 class ProfileUpdateForm(forms.ModelForm):
     username = forms.CharField(max_length=100)
 
@@ -40,3 +45,4 @@ class ProfileUpdateForm(forms.ModelForm):
         profile.user.username = self.cleaned_data['username']
         profile.user.save()
         return profile
+    

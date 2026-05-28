@@ -19,6 +19,7 @@
         </div>
         <h2>Novo anúncio</h2>
         <p class="subtitle">Preencha os dados do produto</p>
+        <hr>
 
         {% if form.errors %}
         <ul class="errorlist">
@@ -30,7 +31,7 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <div class="section-label">Informações gerais</div>
+            <div class="section-label"><center>Informações gerais</center></div>
             <div class="form-field"><label>Título</label>{{ form.title }}</div>
             <div class="field-row">
                 <div class="form-field"><label>Marca</label>{{ form.brand }}</div>
@@ -41,15 +42,12 @@
                 <div class="form-field"><label>Condição</label>{{ form.condition }}</div>
             </div>
 
-            <div class="section-label">Detalhes</div>
+            <div class="section-label" ><center>Detalhes</center></div>
             <div class="form-field"><label>Nome do modelo</label>{{ form.model_name }}</div>
             <div class="form-field"><label>Descrição</label>{{ form.description }}</div>
             <div class="form-field"><label>Foto do produto</label>{{ form.photo }}</div>
             <hr>
-            
-            <div class="form-field"><label>Vendedor: </label>{{ request.user.profile }}</div>
-
-        
+            <div class="section-label"><label>Vendedor: </label>{{ request.user.profile }}</div>  
             <button type="submit" class="form-btn">Publicar anúncio</button>
         </form>
         

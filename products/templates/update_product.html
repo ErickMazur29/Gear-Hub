@@ -68,10 +68,21 @@
           {% endif %}
         </div>
 
+        {% if user.is_superuser %}
+
+        <div class="profile-footer">
+          <a href="{% url 'detail_product' pk=object.pk %}" class="btn-back">← Cancelar</a>
+          <button type="submit" class="btn-edit">Salvar alterações</button>
+        </div>
+
+        {% else %}
+
         <div class="profile-footer">
           <a href="{% url 'profile_detail' request.user.profile.pk %}" class="btn-back">← Cancelar</a>
           <button type="submit" class="btn-edit">Salvar alterações</button>
         </div>
+
+        {% endif %}
 
       </form>
 
