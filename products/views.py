@@ -19,6 +19,7 @@ class ProductsList(ListView):
         queryset = super().get_queryset()
         search = self.request.GET.get('search')
         category = self.request.GET.get('category')
+        brand = self.request.GET.get('brand')
 
         if search:
             queryset = queryset.filter(
@@ -32,6 +33,11 @@ class ProductsList(ListView):
         if category:    
             queryset = queryset.filter(
                 category__name__icontains=category  # FK, so category__name
+            )
+
+        if brand:
+            queryset = queryset.filter(
+                brand__name__icontains=brand # FK, so brand__name
             )
 
         return queryset.distinct()

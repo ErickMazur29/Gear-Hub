@@ -7,6 +7,7 @@ hr {
 .categories {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 1.25rem 0;
   margin: 0 70px;
@@ -15,16 +16,17 @@ hr {
 
 .cat-btn {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   color: #374151;
   background: #fff;
   border: 0.5px solid #e5e7eb;
-  border-radius: 20px;        /* pill shape */
+  border-radius: 10px;        /* pill shape */
   padding: 6px 16px;
   text-decoration: none;
   transition: all 0.15s;
   white-space: nowrap;
+
 }
 
 .cat-btn:hover {
@@ -39,13 +41,82 @@ hr {
   color: #fff;
 }
 
+/* ── Page layout ──────────────────────────────────────────── */
+.page-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin: 0 70px 20px;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+.sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 0.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  position: sticky;
+  margin-top: 24px;
+  max-height: calc(70vh - 100px);
+  overflow-y: auto;
+}
+
+.nav-group-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #9ca3af;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  padding: 0 4px;
+}
+
+.nav-group-label:not(:first-child) {
+  margin-top: 16px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #374151;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 10px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.nav-btn.active {
+  background: #0f1f3d;
+  color: #fff;
+}
+
 .products-grid {
     font-family: 'DM Sans', sans-serif;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.25rem;
     padding: 1.5rem 0;
-    margin: 0px 70px 20px 70px;
+    margin: 0;
 }
 
 .products-grid a {
@@ -147,6 +218,10 @@ hr {
 
 .empty-state {
     text-align: center;
-    padding: 3rem 1rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    font-size: 25px;
     color: #6b7280;
 }

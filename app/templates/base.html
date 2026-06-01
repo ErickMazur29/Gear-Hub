@@ -36,13 +36,13 @@
         align-items: center;
         gap: 16px;
         padding: 0 32px;
-        height: 64px;
-        max-width: 1280px;
+        height: 80px;
+        max-width: 1600px;
         margin: 0 auto;
     }
 
     .nav-logo img {
-        height: 38px;
+        height: 45px;
         width: auto;
         display: block;
     }
@@ -53,10 +53,11 @@
         gap: 4px;
         margin-left: 16px;
         margin-right: auto;
+        
     }
 
     .nav-links a {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 500;
         color: rgba(255, 255, 255, 0.72);
         text-decoration: none;
@@ -78,7 +79,7 @@
         background: rgba(255, 255, 255, 0.1);
         border: 0.5px solid rgba(255, 255, 255, 0.2);
         color: rgba(255, 255, 255, 0.9);
-        margin-left: 20px;
+        margin-left: 0px;
     }
 
     .nav-search {
@@ -97,9 +98,9 @@
         outline: none;
         color: #fff;
         font-family: 'DM Sans', sans-serif;
-        font-size: 13px;
+        font-size: 15px;
         padding: 0 12px;
-        width: 500px;
+        width: 600px;
     }
 
     .nav-search input::placeholder {
@@ -112,9 +113,9 @@
         border-left: 0.5px solid rgba(255, 255, 255, 0.15);
         color: rgba(255, 255, 255, 0.8);
         font-family: 'DM Sans', sans-serif;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 500;
-        padding: 0 14px;
+        padding: 0 16px;
         height: 36px;
         cursor: pointer;
         transition: background .15s;
@@ -127,8 +128,8 @@
     .nav-auth {
         display: flex;
         align-items: center;
-        gap: 15px;
-        margin-left: 8px;
+        gap: 19px;
+        margin-left: 10px;
     }
     .nav-auth p{
         color: #e2e8f0;
@@ -137,7 +138,7 @@
 
     .btn-nav-outline {
         font-family: 'DM Sans', sans-serif;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 500;
         color: rgba(255, 255, 255, 0.8);
         background: transparent;
@@ -147,16 +148,35 @@
         text-decoration: none;
         transition: all .15s;
         cursor: pointer;
+        width: 140px;
     }
 
     .btn-nav-outline:hover {
         background: rgba(255, 255, 255, 0.08);
         color: #fff;
     }
+    .btn-nav-outline-login {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8);
+        background: transparent;
+        border: 0.5px solid rgba(255, 255, 255, 0.25);
+        border-radius: 8px;
+        padding: 7px 16px;
+        text-decoration: none;
+        transition: all .15s;
+        cursor: pointer;
+        width: 80px;
+    }
+    .btn-nav-outline-login:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+    }
 
     .btn-nav-solid {
         font-family: 'DM Sans', sans-serif;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 600;
         color: #0f1f3d;
         background: #fff;
@@ -207,21 +227,22 @@
                 
                 {% if user.is_superuser %}
                 <p>Olá, {{request.user.username}}!</p>
-                <form method="post" action="{% url 'logout' %}" style="margin:0;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn-nav-solid">Logout</button>
                     <a href="{% url 'admin:index' %}" class="btn-nav-outline">Painel Admin</a>
+                    <form method="post" action="{% url 'logout' %}" style="margin:0;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-nav-solid">Logout</button>
+                    </form>
 
                 {% elif user.is_authenticated %}
                 <p>Olá, {{request.user.username}}!</p>
+                <a href="{% url 'profile_detail' request.user.profile.pk %}" class="btn-nav-outline-login">Perfil</a>
                 <form method="post" action="{% url 'logout' %}" style="margin:0;">
                     {% csrf_token %}
                     <button type="submit" class="btn-nav-solid">Logout</button>
-                    <a href="{% url 'profile_detail' request.user.profile.pk %}" class="btn-nav-outline">perfil</a>
                 </form>
 
                 {% else %}
-                <a href="{% url 'login' %}" class="btn-nav-outline">Login</a>
+                <a href="{% url 'login' %}" class="btn-nav-outline-login">Login</a>
                 <a href="{% url 'register' %}" class="btn-nav-outline">Cadastre-se</a>
                 <div class="nav-links">
                     <a href="{% url 'login' %}" class="btn-create">
