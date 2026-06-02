@@ -33,13 +33,20 @@
             <label class="info-label">Idade</label>
             {{ form.age }}
           </div>
+
           <div class="edit-field">
             <label class="info-label">Gênero</label>
             {{ form.gender }}
           </div>
+
           <div class="edit-field">
             <label class="info-label">Telefone</label>
             {{ form.phone }}
+          </div>
+
+          <div class="edit-field">
+            <label class="info-label">Localização (Cidade/Estado)</label>
+            {{ form.local }}
           </div>
 
           {% if form.errors %}

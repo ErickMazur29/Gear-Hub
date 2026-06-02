@@ -15,6 +15,7 @@ class Profile(models.Model):
     age = models.IntegerField()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     phone = models.CharField(max_length=11) 
+    local = models.CharField(max_length=30, null=True)
 
     class Meta:
         verbose_name_plural = 'Profiles'
