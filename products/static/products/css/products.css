@@ -1,3 +1,12 @@
+@media (max-width: 768px) {
+        .nav-search input { width: 180px; }
+        .page-layout { flex-direction: column; }
+        .sidebar { width: 100%; position: static; }
+        .products-grid { margin: 0 16px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+        .detail-wrap { grid-template-columns: 1fr; }
+        .footer-inner { grid-template-columns: 1fr; }
+}
+
 /* styles products */
 hr {
   width: 95%;
