@@ -21,15 +21,17 @@
 /* LEFT — image */
 .detail-image {
     position: relative;
-    background: #f0f2f5;
-    min-height: 450px;
+    background-color: #FFFFFF;
+    object-fit: cover ;
+    min-height: 350px;
 }
 
 .detail-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 700px;
+    object-fit: contain;
     display: block;
+    background-color: #FFFFFF;
 }
 
 .detail-image .no-image {

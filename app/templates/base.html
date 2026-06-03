@@ -197,6 +197,178 @@
         list-style: none;
         text-decoration: none;
     }
+    .footer {
+        background: #0f1f3d;
+        color: rgba(255,255,255,0.7);
+        padding: 40px 0 0;
+        margin-top: 40px;
+    }
+
+    .footer-inner {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 32px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 40px;
+    }
+
+    .footer-logo {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: bold;
+        font-size: 25px;
+        color: #fff;
+    }
+
+    .footer-brand p {
+        font-size: 13px;
+        line-height: 1.7;
+        color: rgba(255,255,255,0.5);
+        margin-top: 10px;
+        max-width: 320px;
+    }
+
+    .footer-col h4 {
+        font-size: 11px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+
+    .footer-col a {
+        display: block;
+        font-size: 13px;
+        color: rgba(255,255,255,0.6);
+        text-decoration: none;
+        margin-bottom: 8px;
+        transition: color 0.15s;
+    }
+
+    .footer-col a:hover { 
+        color: #fff; 
+    }
+
+    .footer-col p {
+        font-size: 13px;
+        color: rgba(255,255,255,0.5);
+        margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+        border-top: 0.5px solid rgba(255,255,255,0.1);
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1600px;
+        margin: 36px auto 0;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+        color: rgba(255,255,255,0.35);
+    }
+
+    .footer-bottom-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .footer-bottom a {
+        font-size: 12px;
+        color: rgba(255,255,255,0.35);
+        text-decoration: none;
+        transition: color 0.15s;
+    }
+
+    .footer-bottom a:hover { 
+        color: rgba(255,255,255,0.7); 
+    }
+
+    /* modal */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-overlay.open { 
+        display: flex; 
+    }
+
+    .modal {
+        background: #fff;
+        border-radius: 16px;
+        padding: 32px;
+        max-width: 520px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .modal h2 {
+        font-size: 17px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 4px;
+    }
+
+    .modal-sub {
+        font-size: 12px;
+        color: #9ca3af;
+        margin-bottom: 20px;
+    }
+
+    .modal-section { 
+        margin-bottom: 18px; 
+    }
+
+    .modal-section h3 {
+        font-size: 13px;
+        font-weight: 600;
+        color: #9ca3af;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .modal-section p {
+        font-size: 13px;
+        color: #111827;
+        line-height: 1.7;
+    }
+
+    .modal-section a {
+        color: #0f1f3d;
+        font-weight: 500;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: transparent;
+        border: 0.5px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 4px 10px;
+        font-size: 12px;
+        color: #6b7280;
+        cursor: pointer;
+        font-family: 'DM Sans', sans-serif;
+        transition: background 0.15s;
+    }
+
+    .modal-close:hover { 
+        background: #f3f4f6; 
+    }
+
 </style>
 
 <body>
@@ -255,7 +427,81 @@
         </div>
     </nav>
 
+    <section>
+
     {% block content %}{% endblock %}
+
+    </section>
+
+    <footer class="footer">
+    <div class="footer-inner">
+
+        <div class="footer-brand">
+        <span class="footer-logo">GearHub</span>
+        <p>Marketplace de tecnologia C2C. Compre e venda produtos de hardware, periféricos, consoles e muito mais diretamente entre usuários.</p>
+        </div>
+
+        <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="{% url 'products_list' %}">Produtos</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'new_product' %}">Novo anúncio</a>
+            <a href="{% url 'profile_detail' request.user.profile.pk %}">Meu perfil</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Cadastre-se</a>
+        {% endif %}
+        </div>
+
+        <div class="footer-col">
+        <h4>Contato & Info</h4>
+        <p>erick.mazur.sousa@gmail.com</p>
+        <a href="https://github.com/ErickMazur29/Gear-Hub" target="_blank">GitHub do projeto</a>
+        <a href="#" id="open-terms">Termos e condições</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 GearHub — Projeto acadêmico</p>
+        <div class="footer-bottom-links">
+        <a href="#" id="open-terms2">Termos e condições</a>
+        <a href="https://github.com/ErickMazur29/Gear-Hub" target="_blank">GitHub</a>
+        </div>
+    </div>
+    </footer>
+
+    <!-- termos -->
+    <div class="modal-overlay" id="terms-modal">
+    <div class="modal">
+        <button class="modal-close" id="close-modal">Fechar</button>
+        <h2>TERMOS E CONDIÇÕES DE VENDA</h2>
+        <p class="modal-sub">Última atualização: 2026</p>
+
+        <div class="modal-section">
+        <h3>Sobre a plataforma</h3>
+        <p>A GearHub é apenas uma plataforma de marketplace. Não solicitamos cadastro de cartão, planos ou assinaturas de nenhum tipo. Nossa plataforma não realiza a compra de nenhum item — caso se interesse por um produto listado em nosso catálogo, entre em contato diretamente com o vendedor através dos dados disponíveis na publicação.</p>
+        </div>
+
+        <div class="modal-section">
+        <h3>Seus dados</h3>
+        <p>Suas informações são únicas e pessoais, usadas apenas para verificação de usuário e confirmação de maioridade. Nunca solicitaremos seus documentos pessoais ou qualquer imagem sua.</p>
+        </div>
+
+        <div class="modal-section">
+        <h3>Projeto acadêmico</h3>
+        <p>Este é um projeto puramente acadêmico com o objetivo de aprender as bases fundamentais do Django num projeto fullstack C2C. Saiba mais em: <a href="https://github.com/ErickMazur29/Gear-Hub" target="_blank">github.com/ErickMazur29/Gear-Hub</a></p>
+        </div>
+    </div>
+    </div>
+
+    <script>
+    const modal = document.getElementById('terms-modal');
+    document.getElementById('open-terms').onclick = e => { e.preventDefault(); modal.classList.add('open'); }
+    document.getElementById('open-terms2').onclick = e => { e.preventDefault(); modal.classList.add('open'); }
+    document.getElementById('close-modal').onclick = () => modal.classList.remove('open');
+    modal.onclick = e => { if(e.target === modal) modal.classList.remove('open'); }
+    </script>
 </body>
 
 </html>

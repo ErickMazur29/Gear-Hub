@@ -11,7 +11,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta: 
         model = User
-        fields = ['username', 'password1', 'password2']
+        fields = ['username', 'email','password1', 'password2']
 
     def save(self, commit=True):
         user = super().save(commit)
@@ -28,8 +28,11 @@ class RegisterForm(UserCreationForm):
     
     def clean_age(self):
         age = self.cleaned_data.get('age')
+        if age is None:
+            raise forms.ValidationError('Idade é obrigatória!')
         if age < 18 :
-            self.add_error('age', 'Apenas maiores de idade podem se cadastrar no site!')
+            raise forms.ValidationError('Apenas maiores de idade podem se cadastrar no site!')
+        return age
     
 class ProfileUpdateForm(forms.ModelForm):
     username = forms.CharField(max_length=100)
