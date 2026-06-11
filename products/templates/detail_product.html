@@ -8,84 +8,85 @@
 
 {% block content %}
 
+<div class="init"><a href="{% url 'products_list' %}">↩</a></div>
 
-<div class="detail-page">
-    <div class="detail-wrap">
-
-        <!-- Image -->
-        <div class="detail-image">
-            {% if product.photo %}
-            <img src="{{ product.photo.url }}" alt="{{ product.model_name }} - {{ product.brand }}">
-            {% else %}
-            <div class="no-image">Sem imagem disponível</div>
-            {% endif %}
-
-            <span class="condition-badge {% if product.condition == 'New' %}badge-new{% else %}badge-used{% endif %}">
-                {{ product.get_condition_display }}
-            </span>
-        </div>
-
-        <!-- Body -->
-        <div class="detail-body">
-            {% if product.category %}
-            <p class="detail-category">{{ product.category }}</p>
-            {% endif %}
-            <h1 class="detail-title">{{ product.title }}</h1>
-            <p class="detail-meta">{{ product.brand }} · {{ product.model_name }}</p>
-            <p class="detail-price">R$ {{ product.price|floatformat:2 }}</p>
-
-            <hr class="detail-divider">
-
-            <div class="detail-specs">
-                <div class="spec-row">
-                    <span class="spec-label">Marca</span>
-                    <span class="spec-value">{{ product.brand }}</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-label">Modelo</span>
-                    <span class="spec-value">{{ product.model_name }}</span>
-                </div>
-                {% if product.category %}
-                <div class="spec-row">
-                    <span class="spec-label">Categoria</span>
-                    <span class="spec-value">{{ product.category }}</span>
-                </div>
+    <div class="detail-page">
+        
+        <div class="detail-wrap">
+            <!-- Image -->
+            <div class="detail-image">
+                {% if product.photo %}
+                <img src="{{ product.photo.url }}" alt="{{ product.model_name }} - {{ product.brand }}">
+                {% else %}
+                <div class="no-image">Sem imagem disponível</div>
                 {% endif %}
-                <div class="spec-row">
-                    <span class="spec-label">Condição</span>
-                    <span class="spec-value">{{ product.get_condition_display }}</span>
-                </div>
+
+                <span class="condition-badge {% if product.condition == 'New' %}badge-new{% else %}badge-used{% endif %}">
+                    {{ product.get_condition_display }}
+                </span>
             </div>
 
-            {% if product.description %}
-            <hr class="detail-divider">
-            <p class="detail-desc-label">Descrição</p>
-            <p class="detail-desc">{{ product.description }}</p>
-            {% endif %}
+            
+            <!-- Body -->
+            <div class="detail-body">
+                {% if product.category %}
+                    <p class="detail-category">{{ product.category }}</p>
+                {% endif %}
+                <h1 class="detail-title">{{ product.title }}</h1>
+                <p class="detail-meta">{{ product.brand }} · {{ product.model_name }}</p>
+                <p class="detail-price">R$ {{ product.price|floatformat:2 }}</p>
 
-            <hr class="detail-divider">
+                <hr class="detail-divider">
 
-            {% if product.seller %}
-            <div class="detail-specs">
-                <div class="spec-row">
-                    <span class="spec-label">Vendedor</span>
-                    <span class="spec-value">{{ product.seller.user }}</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-label">Localização</span>
-                    <span class="spec-value">{{ product.seller.local }}</span>
+                <div class="detail-specs">
+                    <div class="spec-row">
+                        <span class="spec-label">Marca</span>
+                        <span class="spec-value">{{ product.brand }}</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Modelo</span>
+                        <span class="spec-value">{{ product.model_name }}</span>
+                    </div>
+                    {% if product.category %}
+                        <div class="spec-row">
+                            <span class="spec-label">Categoria</span>
+                            <span class="spec-value">{{ product.category }}</span>
+                        </div>
+                    {% endif %}
+                    <div class="spec-row">
+                        <span class="spec-label">Condição</span>
+                        <span class="spec-value">{{ product.get_condition_display }}</span>
+                    </div>
                 </div>
 
-                <div class="spec-row">
-                    <span class="spec-label">Contato</span>
-                    <span class="spec-value">{{ product.seller.phone }}</span>
-                </div>
+                {% if product.description %}
+                    <hr class="detail-divider">
+                    <p class="detail-desc-label">Descrição</p>
+                    <p class="detail-desc">{{ product.description }}</p>
+                {% endif %}
+
+                <hr class="detail-divider">
+
+                {% if product.seller %}
+                    <div class="detail-specs">
+                        <div class="spec-row">
+                            <span class="spec-label">Vendedor</span>
+                            <span class="spec-value">{{ product.seller.user }}</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Localização</span>
+                            <span class="spec-value">{{ product.seller.local }}</span>
+                        </div>
+
+                        <div class="spec-row">
+                            <span class="spec-label">Contato</span>
+                            <span class="spec-value">{{ product.seller.phone }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+
             </div>
-            {% endif %}
-
         </div>
     </div>
 
-</div>
-</div>
 {% endblock %}

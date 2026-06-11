@@ -42,194 +42,204 @@
 
     <div class="page-layout">
 
-        <section>
+        <section id="sidebar-section"> 
 
-        <div class="title-sidebar"><h5>ENCONTRE SEU PRODUTO RAPIDAMENTE</h5></div>
-        <div class="sidebar">
-            <!-- Hardware section -->
-            <p class="nav-group-label">Hardware</p>
-            <div class="navigation">
-                <a href="{% url 'products_list' %}?category=Armazenamento" 
-                class="nav-btn {% if request.GET.category == 'Armazenamento' %}active{% endif %}">
-                Armazenamento
-                </a>
-                <a href="{% url 'products_list' %}?category=Fonte" 
-                    class="nav-btn {% if request.GET.category == 'Fonte' %}active{% endif %}">
-                    Fonte
-                </a>
-                <a href="{% url 'products_list' %}?category=Memória-ram" 
-                    class="nav-btn {% if request.GET.category == 'Memória-ram' %}active{% endif %}">
-                    Memória Ram
-                </a>
-                <a href="{% url 'products_list' %}?category=Placa-mãe" 
-                    class="nav-btn {% if request.GET.category == 'Placa-mãe' %}active{% endif %}">
-                    Placa Mãe
-                </a>
-                <a href="{% url 'products_list' %}?category=Processador" 
-                    class="nav-btn {% if request.GET.category == 'Processador' %}active{% endif %}">
-                    Processador
-                </a>
-                <a href="{% url 'products_list' %}?category=Placa de Video" 
-                    class="nav-btn {% if request.GET.category == 'Placa de Video' %}active{% endif %}">
-                    Placa de Video
-                </a>
-                <a href="{% url 'products_list' %}?category=Refrigerador" 
-                    class="nav-btn {% if request.GET.category == 'Refrigerador' %}active{% endif %}">
-                    Refrigerador
-                </a>
-            </div>
-            
-            <!-- Perifericos section -->
-            <p class="nav-group-label">Periféricos</p>
-            <div class="navigation">
-                <a href="{% url 'products_list' %}?category=Teclado" 
-                class="nav-btn {% if request.GET.category == 'Teclado' %}active{% endif %}">
-                Teclado
-                </a>
-                <a href="{% url 'products_list' %}?category=Microfone" 
-                    class="nav-btn {% if request.GET.category == 'Microfone' %}active{% endif %}">
-                    Microfone
-                </a>
-                <a href="{% url 'products_list' %}?category=WebCam" 
-                    class="nav-btn {% if request.GET.category == 'WebCam' %}active{% endif %}">
-                    WebCam
-                </a>
-                <a href="{% url 'products_list' %}?category=Mouse" 
-                    class="nav-btn {% if request.GET.category == 'Mouse' %}active{% endif %}">
-                    Mouse
-                </a>
-                <a href="{% url 'products_list' %}?category=Fone de ouvido" 
-                    class="nav-btn {% if request.GET.category == 'Fone de ouvido' %}active{% endif %}">
-                    Fones e Headsets
-                </a>
-                <a href="{% url 'products_list' %}?category=Monitor" 
-                    class="nav-btn {% if request.GET.category == 'Monitor' %}active{% endif %}">
-                    Monitor
-                </a>
-            </div>
+            <div class="title-sidebar"><h5>ENCONTRE SEU PRODUTO RAPIDAMENTE</h5></div>
+            <div class="sidebar">
 
-            <!-- Consoles section -->
-            <p class="nav-group-label">Consoles</p>
-            <div class="navigation">
-                <a href="{% url 'products_list' %}?brand=Playstation&category=Console" 
-                class="nav-btn {% if request.GET.brand == 'Playstation' and request.GET.category == 'Console' %}active{% endif %}">
-                Playstation
-                </a>
-                <a href="{% url 'products_list' %}?brand=XBOX&category=Console" 
-                    class="nav-btn {% if request.GET.brand == 'XBOX' and request.GET.category == 'Console' %}active{% endif %}">
-                    XBOX
-                </a>
-                <a href="{% url 'products_list' %}?brand=Nintendo&category=Console" 
-                    class="nav-btn {% if request.GET.brand == 'Nintendo' and request.GET.category == 'Console' %}active{% endif %}">
-                    Nintendo
-                </a>
-                
-            </div>
-            
-            <!-- Smartphones Section section -->
-            <p class="nav-group-label">Smartphone</p>
-            <div class="navigation">
-                <a href="{% url 'products_list' %}?brand=Samsung&category=Smartphone" 
-                    class="nav-btn {% if request.GET.brand == 'Samsung' and request.GET.category == 'Smartphone'%}active{% endif %}">
-                    Samsung
-                </a>
-                <a href="{% url 'products_list' %}?brand=Apple&category=Smartphone" 
-                    class="nav-btn {% if request.GET.brand == 'Apple' and request.GET.category == 'Smartphone'%}active{% endif %}">
-                    Iphone
-                </a>
-                
-            </div>
-
-            <!-- Notebooks Section section -->
-            <p class="nav-group-label">Notebooks</p>
-            <div class="navigation">
-                <a href="{% url 'products_list' %}?brand=Acer&category=Notebook" 
-                    class="nav-btn {% if request.GET.brand == 'Acer' and request.GET.get.category == 'Notebook' %}active{% endif %}">
-                    Acer
-                </a>
-                <a href="{% url 'products_list' %}?brand=Lenovo&category=Notebook" 
-                    class="nav-btn {% if request.GET.brand == 'Lenovo' and request.GET.get.category == 'Notebook' %}active{% endif %}">
-                    Lenovo
-                </a>
-                <a href="{% url 'products_list' %}?brand=HP&category=Notebook" 
-                    class="nav-btn {% if request.GET.brand == 'HP' and request.GET.get.category == 'Notebook' %}active{% endif %}">
-                    HP
-                </a>
-                <a href="{% url 'products_list' %}?brand=Asus&category=Notebook" 
-                    class="nav-btn {% if request.GET.brand == 'Asus' and request.GET.get.category == 'Notebook' %}active{% endif %}">
-                    Asus
-                </a>
-                <a href="{% url 'products_list' %}?brand=Dell&category=Notebook" 
-                    class="nav-btn {% if request.GET.brand == 'Dell' and request.GET.get.category == 'Notebook' %}active{% endif %}">
-                    Dell
-                </a>
-                <a href="{% url 'products_list' %}?brand=Apple&category=Notebook" 
-                    class="nav-btn {% if request.GET.brand == 'Apple' and request.GET.get.category == 'Notebook' %}active{% endif %}">
-                    MacBooks
-                </a>
-                <a href="{% url 'products_list' %}?brand=Samsung&category=Notebook" 
-                    class="nav-btn {% if request.GET.brand == 'Samsung' and request.GET.get.category == 'Notebook' %}active{% endif %}">
-                    Samsung book
-                </a>
-                
-            </div>
-        </div>
-
-        <div class="title-sidebar"><h5>BUSQUE SUA MARCA FAVORITA</h5></div>
-        <div class="sidebar">
-            <!-- Brands section -->
-            <p class="nav-group-label">MARCAS</p>
-            {% for brands in brand %}
-            <div class="navigation">
-                <a href="{% url 'products_list' %}?brand={{ brands.name }}" 
-                    class="nav-btn {% if request.GET.brand == '{{ brands.name }}' %}active{% endif %}">
-                    {{ brands.name }}
-                </a>
-            {% endfor %}
-            </div>
-        </div> 
-        </section>    
-        </div>
-    
-        {% if products %}
-
-        <div style="flex: 1; min-width: 0;">
-            <div class="products-grid">
-            {% for product in products %}
-                <a href="{% url 'detail_product' product.pk %}">
-                    <div class="product-card">
-                        {% if product.photo %}
-                            <img class="product-card__image" src="{{ product.photo.url }}" alt="{{ product.model_name }} - {{ product.brand }}">
-                        {% else %}
-                            <div class="product-card__no-image">Sem imagem</div>
-                        {% endif %}
-
-                        <div class="product-card__body">
-                            <div class="product-card__top">
-                                {% if product.condition == 'New' %}
-                                    <span class="badge badge--new">Novo</span>
-                                {% else %}
-                                    <span class="badge badge--used">Usado</span>
-                                {% endif %}
-                                    <span class="product-card__price">R$ {{ product.price }}</span>
-                            </div>
-
-                            <p class="product-card__title">{{ product.title }}</p>
-                            <p class="product-card__meta">{{ product.brand }}{% if product.category %} · {{ product.category }}{% endif %}</p>
-                            <p class="product-card__desc">{{ product.description }}</p>
-                        </div>
+                <!-- Hardware section -->
+                <p class="nav-group-label">Hardware</p>
+                    <div class="navigation">
+                        <a href="{% url 'products_list' %}?category=Armazenamento" 
+                        class="nav-btn {% if request.GET.category == 'Armazenamento' %}active{% endif %}">
+                        Armazenamento
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Gabinete" 
+                        class="nav-btn {% if request.GET.category == 'Gabinete' %}active{% endif %}">
+                        Gabinete
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Fonte" 
+                            class="nav-btn {% if request.GET.category == 'Fonte' %}ac   tive{% endif %}">
+                            Fonte
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Memória-ram" 
+                            class="nav-btn {% if request.GET.category == 'Memória-ram' %}active{% endif %}">
+                            Memória Ram
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Placa-mãe" 
+                            class="nav-btn {% if request.GET.category == 'Placa-mãe' %}active{% endif %}">
+                            Placa Mãe
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Processador" 
+                            class="nav-btn {% if request.GET.category == 'Processador' %}active{% endif %}">
+                            Processador
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Placa de Video" 
+                            class="nav-btn {% if request.GET.category == 'Placa de Video' %}active{% endif %}">
+                            Placa de Video
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Refrigerador" 
+                            class="nav-btn {% if request.GET.category == 'Refrigerador' %}active{% endif %}">
+                            Refrigerador
+                        </a>
                     </div>
-                </a>
-            {% endfor %}
-            </div>
-        </div>
-    </div> 
+                
+                <!-- Perifericos section -->
+                <p class="nav-group-label">Periféricos</p>
+                    <div class="navigation">
+                        <a href="{% url 'products_list' %}?category=Teclado" 
+                        class="nav-btn {% if request.GET.category == 'Teclado' %}active{% endif %}">
+                        Teclado
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Microfone" 
+                            class="nav-btn {% if request.GET.category == 'Microfone' %}active{% endif %}">
+                            Microfone
+                        </a>
+                        <a href="{% url 'products_list' %}?category=WebCam" 
+                            class="nav-btn {% if request.GET.category == 'WebCam' %}active{% endif %}">
+                            WebCam
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Mouse" 
+                            class="nav-btn {% if request.GET.category == 'Mouse' %}active{% endif %}">
+                            Mouse
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Fone de ouvido" 
+                            class="nav-btn {% if request.GET.category == 'Fone de ouvido' %}active{% endif %}">
+                            Fones e Headsets
+                        </a>
+                        <a href="{% url 'products_list' %}?category=Monitor" 
+                            class="nav-btn {% if request.GET.category == 'Monitor' %}active{% endif %}">
+                            Monitor
+                        </a>
+                    </div>
 
-    {% else %}
-        <div class="empty-state">
-            <p>Nenhum produto cadastrado no momento.</p>
-        </div>
+                <!-- Consoles section -->
+                <p class="nav-group-label">Consoles</p>
+                    <div class="navigation">
+                        <a href="{% url 'products_list' %}?brand=Playstation&category=Console" 
+                        class="nav-btn {% if request.GET.brand == 'Playstation' and request.GET.category == 'Console' %}active{% endif %}">
+                        Playstation
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=XBOX&category=Console" 
+                            class="nav-btn {% if request.GET.brand == 'XBOX' and request.GET.category == 'Console' %}active{% endif %}">
+                            XBOX
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=Nintendo&category=Console" 
+                            class="nav-btn {% if request.GET.brand == 'Nintendo' and request.GET.category == 'Console' %}active{% endif %}">
+                            Nintendo
+                        </a>
+                        
+                    </div>
+                
+                <!-- Smartphones Section section -->
+                <p class="nav-group-label">Smartphone</p>
+                    <div class="navigation">
+                        <a href="{% url 'products_list' %}?brand=Samsung&category=Smartphone" 
+                            class="nav-btn {% if request.GET.brand == 'Samsung' and request.GET.category == 'Smartphone'%}active{% endif %}">
+                            Samsung
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=Apple&category=Smartphone" 
+                            class="nav-btn {% if request.GET.brand == 'Apple' and request.GET.category == 'Smartphone'%}active{% endif %}">
+                            Iphone
+                        </a>
+                    </div>
+
+                <!-- Notebooks Section section -->
+                <p class="nav-group-label">Notebooks</p>
+                    <div class="navigation">
+                        <a href="{% url 'products_list' %}?brand=Acer&category=Notebook" 
+                            class="nav-btn {% if request.GET.brand == 'Acer' and request.GET.get.category == 'Notebook' %}active{% endif %}">
+                            Acer
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=Lenovo&category=Notebook" 
+                            class="nav-btn {% if request.GET.brand == 'Lenovo' and request.GET.get.category == 'Notebook' %}active{% endif %}">
+                            Lenovo
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=HP&category=Notebook" 
+                            class="nav-btn {% if request.GET.brand == 'HP' and request.GET.get.category == 'Notebook' %}active{% endif %}">
+                            HP
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=Asus&category=Notebook" 
+                            class="nav-btn {% if request.GET.brand == 'Asus' and request.GET.get.category == 'Notebook' %}active{% endif %}">
+                            Asus
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=Dell&category=Notebook" 
+                            class="nav-btn {% if request.GET.brand == 'Dell' and request.GET.get.category == 'Notebook' %}active{% endif %}">
+                            Dell
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=Apple&category=Notebook" 
+                            class="nav-btn {% if request.GET.brand == 'Apple' and request.GET.get.category == 'Notebook' %}active{% endif %}">
+                            MacBooks
+                        </a>
+                        <a href="{% url 'products_list' %}?brand=Samsung&category=Notebook" 
+                            class="nav-btn {% if request.GET.brand == 'Samsung' and request.GET.get.category == 'Notebook' %}active{% endif %}">
+                            Samsung book
+                        </a>
+                    </div>
+             </div> <!--fecha categories sidebar -->
+
+
+            <!-- brands sidebar -->
+            <div class="title-sidebar"><h5>BUSQUE SUA MARCA FAVORITA</h5></div>
+            <div class="sidebar">
+                <!-- Brands section -->
+                <p class="nav-group-label">MARCAS</p>
+                {% for brands in brand %}
+                <div class="navigation">
+                    <a href="{% url 'products_list' %}?brand={{ brands.name }}" 
+                        class="nav-btn {% if request.GET.brand == '{{ brands.name }}' %}active{% endif %}">
+                        {{ brands.name }}
+                    </a>
+                {% endfor %}
+                </div>
+            </div> <!--fecha brands sidebar -->
+
+        </section>
+        
+        <section id="products-section">
     
-    {% endif %}
+            {% if products %}
+
+            <div style="flex: 1; min-width: 0;">
+                <div class="products-grid">
+                    {% for product in products %}
+                        <a href="{% url 'detail_product' product.pk %}">
+                            <div class="product-card">
+                                {% if product.photo %}
+                                    <img class="product-card__image" src="{{ product.photo.url }}" alt="{{ product.model_name }} - {{ product.brand }}">
+                                {% else %}
+                                    <div class="product-card__no-image">Sem imagem</div>
+                                {% endif %}
+
+                                <div class="product-card__body">
+                                    <div class="product-card__top">
+                                        {% if product.condition == 'New' %}
+                                            <span class="badge badge--new">Novo</span>
+                                        {% else %}
+                                            <span class="badge badge--used">Usado</span>
+                                        {% endif %}
+                                            <span class="product-card__price">R$ {{ product.price }}</span>
+                                    </div>
+
+                                    <p class="product-card__title">{{ product.title }}</p>
+                                    <p class="product-card__meta">{{ product.brand }}{% if product.category %} · {{ product.category }}{% endif %}</p>
+                                    <p class="product-card__desc">{{ product.description }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        
+            {% else %}
+
+                <div class="empty-state">
+                    <p>Nenhum produto cadastrado no momento.</p>
+                </div>
+
+            {% endif %}
+        
+        </section>
+    </div>
 
 {% endblock %}

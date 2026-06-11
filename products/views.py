@@ -58,6 +58,13 @@ class NewProduct(CreateView):
     success_url = reverse_lazy('products_list')
 
     def form_valid(self, form):
+        # adicionar a nova marca cadastrada pelo usuario
+        new_brand = form.cleaned_data.get('new_brand')
+        if new_brand:
+            brand, _ = Brand.objects.get_or_create(name=new_brand)
+            form.instance.brand = brand
+        
+        # preencher o campo de usuario com o nome de perfil
         form.instance.seller = self.request.user.profile
         return super().form_valid(form)
 
@@ -65,8 +72,6 @@ class DetailProduct(DetailView):
     model = Products
     template_name = 'detail_product.html'
     context_object_name = 'product'
-
-
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class DeleteProduct(UserPassesTestMixin, DeleteView):

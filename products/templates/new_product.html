@@ -35,8 +35,11 @@
             <div class="form-field"><label>Título</label>{{ form.title }}</div>
             <div class="field-row">
                 <div class="form-field"><label>Marca</label>{{ form.brand }}</div>
-                <div class="form-field">
-                    <label>Categoria</label>{{ form.category }} 
+                <div class="form-field"><label>Categoria</label>{{ form.category }}</div>
+                <!-- em caso da opção outro -->
+                 <div class="form-field" id="nova-marca-field" style="display:none;">
+                    <label class="info-label">Digite a marca</label>
+                    {{ form.new_brand }}
                 </div>
             </div>
             <div class="field-row">
@@ -51,11 +54,12 @@
             <hr>
             <div class="section-label"><label>Vendedor: </label>{{ request.user.profile }}</div>  
             <button type="submit" class="form-btn">Publicar anúncio</button>
+            <div class="init"><a href="{% url 'products_list' %}">Voltar</a></div>
         </form>
         
     </div>
 
-    <section>
+    <section id="btn-information">
         <div class="information">
             <a href="#" id="new-product-info">?</a>
         </div>
@@ -63,28 +67,28 @@
 
     <!-- informações -->
     <div class="modal-overlay" id="info-modal">
-    <div class="modal">
-        <button class="modal-close" id="close-modal">Fechar</button>
-        <h2>ESCLARESCIMENTO DE DUVIDAS</h2>
-        <p class="modal-sub">Última atualização: 2026</p>
+        <div class="modal">
+            <button class="modal-close" id="close-modal">Fechar</button>
+            <h2>ESCLARESCIMENTO DE DUVIDAS</h2>
+            <p class="modal-sub">Última atualização: 2026</p>
 
-        <div class="modal-section">
-        <h3>Como saber qual a categoria do meu produto?</h3>
-        <p>Caso possua alguma dúvida sobre qual a categoria ideal do seu produto, siga estes seguintes passos:</p>
-        <br>
-        <p><strong>Função Principal:</strong> Pergunte-se qual é a utilidade central do item. Se ele exibe imagens, é um monitor; se serve para digitação, é um teclado. </p>
-        <br>
-        <p><strong>Uso de Ferramentas de Marketplace:</strong> Use nosso nossa página para buscar produtos semelhantes e verificar em qual nicho eles estão alocados.</p>
-        <br>
-        <p><strong>*Extra:</strong> Se o seu produto não for algo que não exija conexão direta com o computador para funcionar, como: extensão, suportes, cabos, powerbanks. Ele é considerado um acessório.</p>
+            <div class="modal-section">
+            <h3>Como saber qual a categoria do meu produto?</h3>
+            <p>Caso possua alguma dúvida sobre qual a categoria ideal do seu produto, siga estes seguintes passos:</p>
+            <br>
+            <p><strong>Função Principal:</strong> Pergunte-se qual é a utilidade central do item. Se ele exibe imagens, é um monitor; se serve para digitação, é um teclado. </p>
+            <br>
+            <p><strong>Uso de Ferramentas de Marketplace:</strong> Use nosso nossa página para buscar produtos semelhantes e verificar em qual nicho eles estão alocados.</p>
+            <br>
+            <p><strong>*Extra:</strong> Se o seu produto não for algo que não exija conexão direta com o computador para funcionar, como: extensão, suportes, cabos, powerbanks. Ele é considerado um acessório.</p>
+            </div>
+
+            <div class="modal-section">
+            <h3>Como altero as minhas informações de vendedor?</h3>
+            <p>Suas informações estão diretamente ligadas ao seu perfil, caso queira mudar seu nome, telefone ou localização, é preciso alterar na sua aba de perfil</p>
+            </div>
+
         </div>
-
-        <div class="modal-section">
-        <h3>Como altero as minhas informações de vendedor?</h3>
-        <p>Suas informações estão diretamente ligadas ao seu perfil, caso queira mudar seu nome, telefone ou localização, é preciso alterar na sua aba de perfil</p>
-        </div>
-
-    </div>
     </div>
 
     <script>
@@ -92,6 +96,17 @@
     document.getElementById('new-product-info').onclick = e => { e.preventDefault(); modal.classList.add('open'); }
     document.getElementById('close-modal').onclick = () => modal.classList.remove('open');
     modal.onclick = e => { if(e.target === modal) modal.classList.remove('open'); }
+    </script>
+
+    <script>
+    document.getElementById('id_brand').addEventListener('change', function() {
+        const field = document.getElementById('nova-marca-field');
+        if (this.options[this.selectedIndex].text === '[ Outro(a) ]') {
+            field.style.display = 'block';
+        } else {
+            field.style.display = 'none';
+        }
+    });
     </script>
 </div>
 {% endblock %}
