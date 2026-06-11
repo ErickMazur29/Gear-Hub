@@ -59,6 +59,11 @@ hr {
 }
 
 /* ── Sidebar ──────────────────────────────────────────────── */
+
+.title-sidebar{
+  margin: 20px 20px 0px 20px;
+}
+
 .sidebar {
   width: 300px;
   flex-shrink: 0;
@@ -67,8 +72,8 @@ hr {
   border-radius: 12px;
   padding: 16px;
   position: sticky;
-  margin-top: 24px;
-  max-height: calc(70vh - 100px);
+  margin-top: 10px;
+  max-height: calc(65vh - 100px);
   overflow-y: auto;
 }
 

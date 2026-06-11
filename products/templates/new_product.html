@@ -55,34 +55,41 @@
         
     </div>
 
+    <section>
+        <div class="information">
+            <a href="#" id="new-product-info">?</a>
+        </div>
+    </section>
+
     <!-- informações -->
-    <div class="modal-overlay" id="terms-modal">
+    <div class="modal-overlay" id="info-modal">
     <div class="modal">
         <button class="modal-close" id="close-modal">Fechar</button>
-        <h2>TERMOS E CONDIÇÕES DE VENDA</h2>
+        <h2>ESCLARESCIMENTO DE DUVIDAS</h2>
         <p class="modal-sub">Última atualização: 2026</p>
 
         <div class="modal-section">
-        <h3>Sobre a plataforma</h3>
-        <p>A GearHub é apenas uma plataforma de marketplace. Não solicitamos cadastro de cartão, planos ou assinaturas de nenhum tipo. Nossa plataforma não realiza a compra de nenhum item — caso se interesse por um produto listado em nosso catálogo, entre em contato diretamente com o vendedor através dos dados disponíveis na publicação.</p>
+        <h3>Como saber qual a categoria do meu produto?</h3>
+        <p>Caso possua alguma dúvida sobre qual a categoria ideal do seu produto, siga estes seguintes passos:</p>
+        <br>
+        <p><strong>Função Principal:</strong> Pergunte-se qual é a utilidade central do item. Se ele exibe imagens, é um monitor; se serve para digitação, é um teclado. </p>
+        <br>
+        <p><strong>Uso de Ferramentas de Marketplace:</strong> Use nosso nossa página para buscar produtos semelhantes e verificar em qual nicho eles estão alocados.</p>
+        <br>
+        <p><strong>*Extra:</strong> Se o seu produto não for algo que não exija conexão direta com o computador para funcionar, como: extensão, suportes, cabos, powerbanks. Ele é considerado um acessório.</p>
         </div>
 
         <div class="modal-section">
-        <h3>Seus dados</h3>
-        <p>Suas informações são únicas e pessoais, usadas apenas para verificação de usuário e confirmação de maioridade. Nunca solicitaremos seus documentos pessoais ou qualquer imagem sua.</p>
+        <h3>Como altero as minhas informações de vendedor?</h3>
+        <p>Suas informações estão diretamente ligadas ao seu perfil, caso queira mudar seu nome, telefone ou localização, é preciso alterar na sua aba de perfil</p>
         </div>
 
-        <div class="modal-section">
-        <h3>Projeto acadêmico</h3>
-        <p>Este é um projeto puramente acadêmico com o objetivo de aprender as bases fundamentais do Django num projeto fullstack C2C. Saiba mais em: <a href="https://github.com/ErickMazur29/Gear-Hub" target="_blank">github.com/ErickMazur29/Gear-Hub</a></p>
-        </div>
     </div>
     </div>
 
     <script>
-    const modal = document.getElementById('terms-modal');
-    document.getElementById('open-terms').onclick = e => { e.preventDefault(); modal.classList.add('open'); }
-    document.getElementById('open-terms2').onclick = e => { e.preventDefault(); modal.classList.add('open'); }
+    const modal = document.getElementById('info-modal');
+    document.getElementById('new-product-info').onclick = e => { e.preventDefault(); modal.classList.add('open'); }
     document.getElementById('close-modal').onclick = () => modal.classList.remove('open');
     modal.onclick = e => { if(e.target === modal) modal.classList.remove('open'); }
     </script>

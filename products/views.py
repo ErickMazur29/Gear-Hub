@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
-from products.models import Products
+from products.models import Products, Brand, Category
 from products.forms import NewProductForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -41,6 +41,12 @@ class ProductsList(ListView):
             )
 
         return queryset.distinct()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['brand'] = Brand.objects.all()
+        context['category'] = Category.objects.all()
+        return context
     
 
 @method_decorator(login_required(login_url='login'), name='dispatch')

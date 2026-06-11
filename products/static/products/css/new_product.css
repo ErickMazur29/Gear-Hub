@@ -172,6 +172,25 @@
     }
 
     /* modal info*/
+
+    .information{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #1a3260;
+        padding: auto;
+        margin: auto;
+        color: #e5e7eb;
+    }
+    .information a{
+        padding: auto;
+        margin: auto;
+        color: #e5e7eb;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
     
     .modal-overlay {
         display: none;
