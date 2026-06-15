@@ -59,7 +59,7 @@ DATABASES = {
         'NAME': os.environ.get('PGDATABASE', 'gearhub'),
         'USER': os.environ.get('PGUSER', 'postgres'),
         'PASSWORD': os.environ.get('PGPASSWORD', ''),
-        'HOST': os.environ.get('PGHOST', 'localhost'),
+        'HOST': os.environ.get('PGHOST', 'postgres'),
         'PORT': os.environ.get('PGPORT', '5432'),
     }
 }
