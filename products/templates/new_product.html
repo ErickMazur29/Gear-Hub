@@ -68,7 +68,7 @@
     <!-- informações -->
     <div class="modal-overlay" id="info-modal">
         <div class="modal">
-            <button class="modal-close" id="close-modal">Fechar</button>
+            <button class="modal-close" id="modal-close">Fechar</button>
             <h2>ESCLARESCIMENTO DE DUVIDAS</h2>
             <p class="modal-sub">Última atualização: 2026</p>
 
@@ -88,14 +88,19 @@
             <p>Suas informações estão diretamente ligadas ao seu perfil, caso queira mudar seu nome, telefone ou localização, é preciso alterar na sua aba de perfil</p>
             </div>
 
+            <div class="modal-section">
+            <h3>📍ATENÇÃO</h3>
+            <p>Estes produtos são e devem ser ficticios sem nenhum fim de venda real! Para mais detalhes consulte os termos e condições em nosso rodapé</p>
+            </div>
+
         </div>
     </div>
 
     <script>
-    const modal = document.getElementById('info-modal');
-    document.getElementById('new-product-info').onclick = e => { e.preventDefault(); modal.classList.add('open'); }
-    document.getElementById('close-modal').onclick = () => modal.classList.remove('open');
-    modal.onclick = e => { if(e.target === modal) modal.classList.remove('open'); }
+    const modal_info = document.getElementById('info-modal');
+    document.getElementById('new-product-info').onclick = e => { e.preventDefault(); modal_info.classList.add('open'); }
+    document.getElementById('modal-close').onclick = () => modal_info.classList.remove('open');
+    modal_info.onclick = e => { if(e.target === modal_info) modal_info.classList.remove('open'); }
     </script>
 
     <script>
