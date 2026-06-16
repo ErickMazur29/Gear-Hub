@@ -188,7 +188,7 @@
                 <div class="navigation">
                     <a href="{% url 'products_list' %}?brand={{ brands.name }}" 
                         class="nav-btn {% if request.GET.brand == '{{ brands.name }}' %}active{% endif %}">
-                        {{ brands.name }}
+                        {{ brands.name|cut:"z_Outro(a)" }}
                     </a>
                 {% endfor %}
                 </div>

@@ -159,11 +159,6 @@ CSRF_TRUSTED_ORIGINS=http://localhost:8000
 
 ---
 
-## 📸 Screenshots
-
-> *Em breve*
-
----
 
 ## 📄 Licença
 
@@ -171,6 +166,6 @@ Este projeto é acadêmico e de uso livre para fins de estudo.
 
 ---
 
-<p align="center">Desenvolvido por <strong>Sousa</strong> · Portfólio Django</p>
+<p align="center">Desenvolvido por <strong>Erick Mazur</strong> · Portfólio Django</p>
 
 Um projeto full-stack em django no desenvolvimento de um site c2c focado na area tech.
