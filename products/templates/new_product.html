@@ -34,7 +34,7 @@
             <div class="section-label"><center>Informações gerais</center></div>
             <div class="form-field"><label>Título</label>{{ form.title }}</div>
             <div class="field-row">
-                <div class="form-field"><label>Marca</label>{{ form.brand }}</div>
+                <div class="form-field"><label>Marca</label>{{ form.brand|cut:"z_" }}</div>
                 <div class="form-field"><label>Categoria</label>{{ form.category }}</div>
                 <!-- em caso da opção outro -->
                  <div class="form-field" id="nova-marca-field" style="display:none;">
@@ -106,7 +106,7 @@
     <script>
     document.getElementById('id_brand').addEventListener('change', function() {
         const field = document.getElementById('nova-marca-field');
-        if (this.options[this.selectedIndex].text === '[ Outro(a) ]') {
+        if (this.options[this.selectedIndex].text === 'Outro') {
             field.style.display = 'block';
         } else {
             field.style.display = 'none';
