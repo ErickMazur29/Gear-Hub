@@ -65,7 +65,7 @@ hr {
 }
 
 .sidebar {
-  width: 300px;
+  width: 250px;
   flex-shrink: 0;
   background: #fff;
   border: 0.5px solid #e5e7eb;
