@@ -13,7 +13,7 @@ def create_profile(sender, instance, created, **kwargs):
     created: indica se o objeto foi criado para acionar
     instance: a intancia que sera passada ao profile
     '''
-    if created and not hasattr(instance, 'profile'): # se o usuario foi criado e não possui perfil...
+    if created and instance.is_superuser and not hasattr(instance, 'profile'): # se o usuario foi criado e não possui perfil...
         Profile.objects.create(
             user=instance,
             age=30,
