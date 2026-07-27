@@ -9,7 +9,7 @@
 ![Railway](https://img.shields.io/badge/Deploy-Railway-purple?logo=railway)
 
 > ⚠️ **Projeto acadêmico para fins de portfólio. Não realize transações reais.**
-
+### Acesse em: https://gear-hub-production.up.railway.app/
 ---
 
 ## 📋 Sobre o Projeto
