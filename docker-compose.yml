@@ -1,0 +1,26 @@
+services:
+  gearhub_web:
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - gearhub_db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@gearhub_db:5432/gearhub
+
+  gearhub_db:
+    image: postgres:16
+    restart: always
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=gearhub
+
+
+volumes:
+  postgres_data:
