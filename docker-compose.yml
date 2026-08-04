@@ -8,6 +8,8 @@ services:
       - gearhub_db
     environment:
       - DATABASE_URL=postgres://postgres:postgres@gearhub_db:5432/gearhub
+    volumes:
+    - media_data:/app/media
 
   gearhub_db:
     image: postgres:16
@@ -24,3 +26,4 @@ services:
 
 volumes:
   postgres_data:
+  media_data:

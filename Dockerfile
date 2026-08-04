@@ -11,7 +11,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN adduser --disabled-password --no-create-home appuser && chown -R appuser:appuser /app
+RUN adduser --disabled-password --no-create-home appuser \
+    && mkdir -p /app/media \
+    && chown -R appuser:appuser /app
 USER appuser
 
 
