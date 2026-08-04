@@ -5,6 +5,7 @@
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![Django](https://img.shields.io/badge/Django-6.0-green?logo=django)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-Media-orange?logo=cloudinary)
 ![Railway](https://img.shields.io/badge/Deploy-Railway-purple?logo=railway)
 
@@ -15,6 +16,8 @@
 ## 📋 Sobre o Projeto
 
 O **Gear Hub** é um marketplace C2C (consumidor para consumidor) voltado ao segmento de tecnologia, desenvolvido como projeto de portfólio. A plataforma permite que usuários cadastrem e anunciem produtos como hardware, periféricos, consoles, notebooks e acessórios, além de favoritar anúncios e gerenciar seus perfis.
+
+> 🐳 Esta branch (`docker`) contém a versão containerizada do projeto, com Dockerfile e Docker Compose para rodar a aplicação e o banco PostgreSQL isolados em containers, sem depender de instalação manual de dependências no host.
 
 ---
 
@@ -36,7 +39,8 @@ O **Gear Hub** é um marketplace C2C (consumidor para consumidor) voltado ao seg
 | Camada | Tecnologia |
 |---|---|
 | Backend | Django 6.0 (Python 3.12) |
-| Banco de Dados | PostgreSQL |
+| Banco de Dados | PostgreSQL 16 |
+| Containerização | Docker + Docker Compose |
 | Armazenamento de Mídia | Cloudinary |
 | Deploy | Railway |
 | Frontend | HTML, CSS (sem frameworks) |
@@ -66,6 +70,9 @@ Gear-Hub/
 │   ├── forms.py
 │   └── templates/
 ├── static/            # CSS e assets estáticos
+├── Dockerfile         # Imagem da aplicação
+├── docker-compose.yml # Orquestração web + banco
+├── .dockerignore
 ├── manage.py
 └── requirements.txt
 ```
@@ -86,17 +93,70 @@ Gear-Hub/
 
 ## 🚀 Como Rodar Localmente
 
-### Pré-requisitos
+Existem duas formas de rodar o projeto localmente: com **Docker** (recomendada, ambiente isolado e reprodutível) ou de forma **manual** (ambiente virtual Python direto no host).
+
+### 🐳 Opção 1 — Com Docker (recomendado)
+
+#### Pré-requisitos
+- Docker
+- Docker Compose
+- Git
+
+#### Passo a passo
+
+```bash
+# Clone o repositório e entre na branch docker
+git clone https://github.com/ErickMazur29/Gear-Hub.git
+cd Gear-Hub
+git checkout docker
+
+# Configure as variáveis de ambiente
+cp .env.example .env
+# Edite o .env com suas credenciais (veja a seção "Variáveis de Ambiente" abaixo)
+
+# Suba a aplicação e o banco PostgreSQL
+docker compose up --build
+```
+
+Com os containers rodando, em outro terminal:
+
+```bash
+# Rode as migrations
+docker compose exec gearhub_web python manage.py migrate
+
+# Crie um superusuário
+docker compose exec gearhub_web python manage.py createsuperuser
+```
+
+A aplicação estará disponível em `http://localhost:8000`.
+
+**Comandos úteis:**
+
+```bash
+docker compose up -d              # Sobe em background
+docker compose down               # Para os containers (mantém os dados do banco)
+docker compose down -v            # Para os containers e apaga os dados do banco
+docker compose logs -f            # Acompanha os logs em tempo real
+docker compose exec gearhub_web bash  # Abre um shell dentro do container da aplicação
+```
+
+> Sair do shell do container ou fechar o terminal não derruba a aplicação — ela continua rodando em background. Só é necessário rodar `docker compose up --build` novamente se os containers forem parados/removidos (`docker compose down`).
+
+---
+
+### 🐍 Opção 2 — Manual (sem Docker)
+
+#### Pré-requisitos
 
 - Python 3.12+
 - PostgreSQL
 - Git
 
-### Passo a passo
+#### Passo a passo
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/Gear-Hub.git
+git clone https://github.com/ErickMazur29/Gear-Hub.git
 cd Gear-Hub
 
 # Crie e ative o ambiente virtual
@@ -132,18 +192,13 @@ SECRET_KEY=sua-secret-key
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 
-PGDATABASE=gearhub
-PGUSER=postgres
-PGPASSWORD=sua-senha
-PGHOST=localhost
-PGPORT=5432
+# Usada pelo docker-compose.yml (via dj-database-url)
+# Host = nome do serviço no Compose (gearhub_db), não localhost
+DATABASE_URL=postgres://postgres:postgres@gearhub_db:5432/gearhub
 
-CLOUDINARY_CLOUD_NAME=seu-cloud-name
-CLOUDINARY_API_KEY=sua-api-key
-CLOUDINARY_API_SECRET=seu-api-secret
-
-CSRF_TRUSTED_ORIGINS=http://localhost:8000
 ```
+
+> Rodando sem Docker (Opção 2), troque o host do `DATABASE_URL` para `localhost` (ou o host do seu PostgreSQL local).
 
 ---
 
@@ -168,4 +223,4 @@ Este projeto é acadêmico e de uso livre para fins de estudo.
 
 <p align="center">Desenvolvido por <strong>Erick Mazur</strong> · Portfólio Django</p>
 
-Um projeto full-stack em django no desenvolvimento de um site c2c focado na area tech.
+<p align="center">Um projeto full-stack em django no desenvolvimento de um site c2c focado na area tech.</p>
